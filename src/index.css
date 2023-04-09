@@ -1,0 +1,278 @@
+@font-face {
+  font-family: 'Linebeam';
+  src: local('Linebeam'), url(./assets/Linebeam.woff2) format('woff2');
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #202124;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+/*LOGO*/
+#logo {
+  -webkit-text-stroke: 1px #37FF8B;
+  filter: drop-shadow(0 0 23px #37FF8B);
+  height: 4rem;
+  scale: 0.75;
+}
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-flicker {
+  -webkit-animation: flickerAnimation .05s infinite;
+  -moz-animation: flickerAnimation .05s infinite;
+  -o-animation: flickerAnimation .05s infinite;
+  animation: flickerAnimation .05s infinite;
+}
+
+/*GAMETEXT*/
+.gametext {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 400px;
+  min-width: 300px;
+  height: auto;
+  color: black;
+}
+
+.gametext img {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.finishedwords {
+  color: green;
+}
+
+#pcurrent {
+  text-align: left;
+}
+
+#pnext {
+  text-align: right;
+}
+
+.ingamestats {
+  width: 100%;
+  
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: auto;
+  
+
+
+}
+
+
+/*MAINGAME*/
+.maingame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.maingame p {
+  width: 100%;
+  margin: 0.2rem;
+}
+
+
+
+.maingame select {
+  margin-bottom: 2.5rem;
+  background-color: #202124;
+  outline: none;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+
+
+
+
+
+
+
+/*INPUT*/
+.input {
+  font-weight: 500;
+  font-size: 14px;
+  height: 40px;
+  width: 100%;
+  border-radius: 10px;
+  padding-left: 10px;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  outline: none;
+  background-color: #303136;
+  color: white;
+}
+
+.input:focus {
+  border-bottom: 1px solid #5AE092;
+  -webkit-transition: 0.1s;
+  transition: 0.5s;
+}
+
+input::placeholder {
+  opacity: 1;
+  color: #999;
+}
+
+
+
+
+
+
+/*BUTTON*/
+/* === removing default button style ===*/
+.button {
+  font-family: 'Linebeam';
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  background-color: #202124;
+  color: white;
+}
+
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgb(255, 255, 255, 0.6);
+  --animation-color: #5DE897;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Linebeam";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+
+
+/*AUSWAHL TEXT*/
