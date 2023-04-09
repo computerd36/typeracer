@@ -140,16 +140,45 @@ body {
 
 .ingamestats {
   width: 100%;
-  
+
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: auto;
-  
-
-
 }
+
+/*ENDSCORE*/
+.score {
+  display: grid;
+  font: 1.5rem 'Linebeam';
+  grid-template-areas: "stack";
+}
+
+.score>* {
+  grid-area: stack;
+}
+
+.score a {
+  font-size: bigger;
+  color: #37FF8B;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+
+#scorewpm {
+  margin-top: 200px;
+}
+
+#scoreaccuracy {
+  margin-top: 250px;
+}
+
+#scoretime {
+  margin-top: 0;
+}
+
 
 
 /*MAINGAME*/
@@ -159,6 +188,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+
 }
 
 .maingame p {

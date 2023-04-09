@@ -25,15 +25,17 @@ export default function Typeracer(props: { text: string }) {
     }, [isRunning]);
 
     React.useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (finishedWords.length > 0 && time > 0) {
-                const elapsedSeconds = Math.floor((Date.now() - starttime) / 1000);
-                setWpm(Math.floor(finishedWords.length / (elapsedSeconds / 60)));
-            }
-        }, 1000); // Call the hook every 1000 milliseconds (1 second)
+        if (isRunning && !isFinished) {
+            const intervalId = setInterval(() => {
+                if (finishedWords.length > 0 && time > 0) {
+                    const elapsedSeconds = Math.floor((Date.now() - starttime) / 1000);
+                    setWpm(Math.floor(finishedWords.length / (elapsedSeconds / 60)));
+                }
+            }, 1000); // Call the hook every 1000 milliseconds (1 second)
 
-        // Cleanup function to clear the interval when the component unmounts
-        return () => clearInterval(intervalId);
+            // Cleanup function to clear the interval when the component unmounts
+            return () => clearInterval(intervalId);
+        }
     }, [finishedWords, time]);
 
 
@@ -103,9 +105,8 @@ export default function Typeracer(props: { text: string }) {
     }
 
     function changeText(e: React.ChangeEvent<HTMLSelectElement>) {
-        const tPolice = "Incidents of excessive and unnecessary force by law enforcement officers have become increasingly visible in recent years. One of the key challenges is holding officers accountable. Steps to address this issue include rigorous training and screening, increasing community oversight of police departments, and reforming laws to better protect citizen rights. Let's use our voices and actions to demand change for a more just and equitable society.";
+        const tPolice = "Excessive and unnecessary force by law enforcement officers is a problem that needs accountability. This requires better training and screening, community oversight, and improved laws to protect citizens. We must demand change for a fairer society.";
         const tBees = "Bees, butterflies, and other insects play a crucial role in pollinating plants, but they are facing serious threats such as habitat loss, pesticides, and climate change. Without these pollinators, many of our favorite fruits and vegetables would disappear. It's important that we take action to protect these essential creatures, such as planting pollinator-friendly gardens, reducing pesticide use, and supporting policies that promote insect conservation. Let's type quickly and spread the word about the importance of protecting bees and other insects!";
-        const tCovid = "The COVID-19 pandemic has had a devastating impact on the world. The virus has infected millions of people and caused hundreds of thousands of deaths. The best way to prevent the spread of the virus is to wear a mask, practice social distancing, and wash your hands frequently. Vaccines are now available, and it's important that everyone gets vaccinated as soon as possible. Let's work together to end the pandemic and protect our communities!";
         const tCultural = "Cultural appropriation is the adoption of elements from a culture without understanding the significance behind it, perpetuating harmful stereotypes and erasing the history of marginalized communities. Educate yourself and engage in respectful cultural exchange. Let's type fast and promote cultural sensitivity and respect!"
         const tTest = "This is a test.";
 
@@ -117,10 +118,6 @@ export default function Typeracer(props: { text: string }) {
             case "bees":
                 setText(tBees);
                 setWords(tBees.split(" "));
-                break;
-            case "covid":
-                setText(tCovid);
-                setWords(tCovid.split(" "));
                 break;
             case "cultural":
                 setText(tCultural);
@@ -156,10 +153,9 @@ export default function Typeracer(props: { text: string }) {
                 <div className="select">
                     <label htmlFor="select">Text: </label>
                     <select onChange={changeText}>
-                        <option value="police">Police Brutality</option>
-                        <option value="bees">Bees</option>
-                        <option value="covid">COVID-19</option>
-                        <option value="cultural">Cultural Appropriation</option>
+                        <option value="police">Short: Police Brutality</option>
+                        <option value="cultural">Medium: Cultural Appropriation</option>
+                        <option value="bees">Long: Bees</option>
                         <option value="test">Test</option>
                     </select>
                 </div>
@@ -198,7 +194,14 @@ export default function Typeracer(props: { text: string }) {
                         ))}
 
                         {text}
-                        {isFinished && <img src={finishedpic} alt="You made it!"></img>}
+                        {isFinished &&
+                            <div className="score">
+                                <img src={finishedpic} alt="You made it!"></img>
+                                <a id="scoreaccuracy">{ (errors !== 0) ? errors / wordcount * 100 : 100} % accuracy</a>
+                                <a id="scorewpm">{wpm} WPM</a>
+                                <a id="scoretime">{time} s</a>
+                            </div>
+                        }
                     </div>
                     {!isFinished && <p id="pnext">Words left: <strong>{words.length} / {wordcount}</strong></p>}
                     {(!isFinished && !inputEmpty) ? <p id="pcurrent">Current word: <strong>{words[0]}</strong></p> : <p>⠀</p>}
