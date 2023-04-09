@@ -143,6 +143,9 @@ export default function Typeracer(props: { text: string }) {
         setStarttime(0);
         setTime(0);
         setWpm(0);
+        setFinishedWords([""]);
+        setErrors(0);
+        
     }
 
     return (
@@ -162,7 +165,7 @@ export default function Typeracer(props: { text: string }) {
             )}
 
             {isFinished && (
-                time && (
+                time && !isFinished && (
                     <p>
                         It took you {time} seconds for {wordcount} words. Thats {wpm} WPM! <br />
                     </p>
