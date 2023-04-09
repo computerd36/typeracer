@@ -200,7 +200,7 @@ export default function Typeracer(props: { text: string }) {
                         {isFinished &&
                             <div className="score">
                                 <img src={finishedpic} alt="You made it!"></img>
-                                <a id="scoreaccuracy">{ (errors !== 0) ? errors / wordcount * 100 : 100} % accuracy</a>
+                                <a id="scoreaccuracy">{ Math.floor((errors !== 0) ? errors / wordcount * 100 : 100)} % accuracy</a>
                                 <a id="scorewpm">{wpm} WPM</a>
                                 <a id="scoretime">{time} s</a>
                             </div>
