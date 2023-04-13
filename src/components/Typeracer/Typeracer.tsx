@@ -17,6 +17,7 @@ export default function Typeracer(props: { text: string }) {
     const [wpm, setWpm] = React.useState(0);
     const [errors, setErrors] = React.useState(0);
     const [inputEmpty, setInputempty] = React.useState(true);
+    const [lastWordWrong, setLastWordWrong] = React.useState(false);
 
     React.useEffect(() => {
         if (isRunning && inputRef.current) {
@@ -53,6 +54,7 @@ export default function Typeracer(props: { text: string }) {
     }, [isFinished]);
 
     function madeError() {
+        setLastWordWrong(true);
         const input = document.getElementById("gameinput");
         if (input) {
             input.style.backgroundColor = "red";
@@ -74,7 +76,7 @@ export default function Typeracer(props: { text: string }) {
             if (words.length === 1) {
                 setIsFinished(true);
             }
-
+            setLastWordWrong(false);
             setIndex(index + 1);
             setInput("");
             e.target.value = "";
@@ -200,7 +202,7 @@ export default function Typeracer(props: { text: string }) {
                         {isFinished &&
                             <div className="score">
                                 <img src={finishedpic} alt="You made it!"></img>
-                                <a id="scoreaccuracy">{ Math.floor((errors !== 0) ? errors / wordcount * 100 : 100)} % accuracy</a>
+                                <a id="scoreaccuracy">{ Math.floor((errors !== 0) ? 100 - (errors / wordcount * 100) : 100)} % accuracy</a>
                                 <a id="scorewpm">{wpm} WPM</a>
                                 <a id="scoretime">{time} s</a>
                             </div>
